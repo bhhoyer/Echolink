@@ -1,0 +1,25 @@
+1. The link will be made on 2M; the EchoLink radio will access the repeater just as a normal user does - transmitting on 146.1, receiving on 146.7.
+
+2. Connection to the EchoLink station will only be allowed for stations on a “white list”; there will be no general public access. The initial white list will probably be all club members, plus any friends whose calls members submit.
+
+3. The EchoLink radio transmitter should be keyed up by a wired PTT connection, not VOX, and “hangtime” should be as close to zero as practical.
+
+4. The EchoLink transmission of audio to the internet should be controlled by the EchoLink radio squelch signal, not VOX.
+
+5. There should be some sort of independent timeout for an EchoLink “stuck mike”. Because the computer end of the link, i.e. the remote user, may use a keyboard button to toggle PTT, it is apparently common for users to forget to unkey when done speaking. Ideally, a few seconds of dead air should drop the PTT to the EchoLink radio. (This may not be easy to implement.)
+
+6. It should be possible for multiple EchoLink users to connect at the same time, and to hear each other as well as the repeater output. (I think this is called “Conferencing” in the EchoLink world.)
+
+7. The only feature allowed over EchoLink is a connection from an individual. EchoLink users should not be able to connect the link to “reflectors” or other sources. In essence, an EchoLink user should have no less, and no more, functionality available than a normal user directly accessing the repeater via radio.
+
+8. With regard to #7, it is acceptable and perhaps even desirable, for EchoLink users to be able to send DTMF commands to the repeater via the link, but it is not required. However, DTMF commands sent to the repeater from EchoLink should NOT be heard by other EchoLink users. (Equivalent to the DTMF mute function of the repeater controller – incoming DTMF tones are not repeated on the output.)
+
+9. There must be a path to disable the link via a command to the repeater. Since EchoLink is using 2M, this means the command must come over a different band available at Cady, either 220 or 440. The EchoLink station must monitor this other frequency, and respond to some special audio signal. Since the 220 radio on Cady could be on one of two frequencies, it may be best if the EchoLink station monitored 440. The “special audio signal” could be a sequence of touch tones, or anything else that can be put into a .wav file and transmitted. You can assume that the special audio signal will be sent by itself, i.e., not on top of a voice conversation. It would be a plus if the link could also be disabled via the internet, but that capability is not a substitute for being able to kill the link via the Cady repeater.
+
+Theory: If a trusted operator hears a problem with the link on the repeater, he is very likely to be able to use the repeater to kill the link, but he does not necessarily have internet access.
+
+10. The kill path in #9 should be independent of the EchoLink computer. If the computer fails, or the software runs amok, the kill path must still work. Thus, the kill path must have an independent signal decoder, and should either intercept PTT to the EchoLink radio, or kill the 12V power to the radio.
+
+11. There should probably be an “unkill” command using the same path as the kill command. This is a nice to have, not a need to have. The world would not come to an end if EchoLink operation could not be restored until the local operator returned home and manually reset the kill circuit.
+
+12. Although it is tempting to implement the kill path in #9 using the existing transmitters on Cady (220 or 440), it would not be out of the question to add a dedicated transmitter just for the kill command. For example, the controller at Cady could easily key up a separate 440 transmitter on a simplex or telecommand frequency using a DCS code, a quite rare thing in normal use. The kill circuit at the EchoLink site would then merely have to took for open squelch from a 440 receiver set to that DCS code, rather than decodin some special tones. The complication is, there would need to be an ID on the 440 transmission, but that could be done by an add on board, one of which we happen to have. It is not immediately obvious how this approach would do an unkill command, unless kill and unkill are toggled by reception of the 440 signal.
